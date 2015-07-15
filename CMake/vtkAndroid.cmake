@@ -46,6 +46,7 @@ macro(compile_vtk_tools)
     ${VTK_BUILD_COMMAND} vtkCompileTools
     CMAKE_ARGS
       -DCMAKE_BUILD_TYPE:STRING=Release
+      -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}/vtk-compile-tools
       -DVTK_BUILD_ALL_MODULES:BOOL=OFF
       -DVTK_Group_Rendering:BOOL=OFF
       -DVTK_Group_StandAlone:BOOL=ON
