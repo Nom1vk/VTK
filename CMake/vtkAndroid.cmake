@@ -102,7 +102,7 @@ set(android_cmake_flags
   -DModule_vtkRenderingCore:BOOL=ON
   -DModule_vtkRenderingLOD:BOOL=ON
   -DModule_vtkRenderingAnnotation:BOOL=OFF
-  -DModule_vtkRenderingFreeType:BOOL=ON
+  -DModule_vtkRenderingFreeType:BOOL=OFF
 )
 
 macro(crosscompile target toolchain_file)

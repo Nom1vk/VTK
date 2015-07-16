@@ -2,10 +2,10 @@ PROJECT (VTKFTGLES)
 
 set(vtkftgles_THIRD_PARTY 1)
 set(vtkftgles_LIBRARIES vtkftgles)
-set(vtkftgles_INCLUDE_DIRS ${VTKFTGL_SOURCE_DIR}/src)
+set(vtkftgles_INCLUDE_DIRS ${VTKFTGLES_SOURCE_DIR}/src)
 vtk_module_export_info()
 set(VTK_FREETYPE_LIBRARIES ${vtkfreetype_LIBRARIES})
-
+include_directories(${vtkfreetype_INCLUDE_DIRS})
 #
 # Dependency mask
 #
@@ -22,7 +22,7 @@ SET (VTKFTGLES_LIBS "")
 # Do not use the STL (portability issue)
 #
 
-SET (VTKFTGLES_DO_NOT_USE_STL 1)
+SET (VTKFTGL_DO_NOT_USE_STL 1)
 
 #
 # Source files
@@ -45,8 +45,8 @@ SET (FTGLES_SRCS
 #
 # Do not use texture fonts (crash on Type1 fonts)
 # 
-SET (VTKFTGLES_DO_NOT_USE_TEXTURE_FONT 1)
-IF (NOT VTKFTGLES_DO_NOT_USE_TEXTURE_FONT)
+SET (VTKFTGL_DO_NOT_USE_TEXTURE_FONT 1)
+IF (NOT VTKFTGL_DO_NOT_USE_TEXTURE_FONT)
   SET (FTGLES_SRCS ${FTGLES_SRCS}
     src/FTTextureFont.cpp
     src/FTTextureGlyph.cpp
@@ -57,8 +57,8 @@ ENDIF ()
 # Do not use vector fonts (we only need pixmap and bitmaps and vector fonts
 # needs glu). Might be an option at some point, but set it to 'true' for now.
 # 
-SET (VTKFTGLES_DO_NOT_USE_VECTORISER 1)
-IF (NOT VTKFTGLES_DO_NOT_USE_VECTORISER)
+SET (VTKFTGL_DO_NOT_USE_VECTORISER 1)
+IF (NOT VTKFTGL_DO_NOT_USE_VECTORISER)
   SET (FTGLES_SRCS ${FTGL_SRCS}
     src/FTExtrudeGlyph.cpp
     src/FTExtrudeFont.cpp
@@ -72,9 +72,9 @@ ENDIF ()
 # Shared/static lib settings)
 # 
 IF (BUILD_SHARED_LIBS)
-  SET (VTKFTGLES_DLL 1)
+  SET (VTKFTGL_DLL 1)
 ELSE ()
-  SET (VTKFTGLES_STATIC 1)
+  SET (VTKFTGL_STATIC 1)
 ENDIF ()
 
 #
@@ -82,7 +82,7 @@ ENDIF ()
 # 
 IF (WIN32)
   # This will add -DUSE_STD_NAMESPACE and -DWIN32
-  SET (VTKFTGLES_WIN32_FLAGS 1)
+  SET (VTKFTGL_WIN32_FLAGS 1)
 ENDIF ()
 
 #
@@ -90,7 +90,7 @@ ENDIF ()
 # 
 IF (UNIX)
   IF(CMAKE_SYSTEM MATCHES "HP-UX.*")
-    SET (VTKFTGLES_HPUX_SOURCE 1)
+    SET (VTKFTGL_HPUX_SOURCE 1)
   ENDIF()
 ENDIF ()
 
@@ -140,9 +140,9 @@ TARGET_LINK_LIBRARIES(vtkftgles ${VTKFTGLES_LIBS})
 #
 # Create the configuration file
 # 
-ADD_DEFINITIONS (-DVTKFTGLES)
-CONFIGURE_FILE(${VTKFTGLES_SOURCE_DIR}/vtkftglesConfig.h.in
-               ${VTKFTGLES_BINARY_DIR}/vtkftglesConfig.h)
+ADD_DEFINITIONS (-DVTKFTGLES -DVTKFTGL)
+CONFIGURE_FILE(${VTKFTGLES_SOURCE_DIR}/vtkftglConfig.h.in
+               ${VTKFTGLES_BINARY_DIR}/vtkftglConfig.h)
 
 #
 # Build examples (testing purposes)

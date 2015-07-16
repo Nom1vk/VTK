@@ -25,7 +25,7 @@
 
 #ifndef __ftgl__
 #   warning Please use <FTGL/ftgl.h> instead of <FTBuffer.h>.
-#   include <FTGL/ftgl.h>
+#   include <FTGL/ftgles.h>
 #endif
 
 #ifndef __FTBuffer__

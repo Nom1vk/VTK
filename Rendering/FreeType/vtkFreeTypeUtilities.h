@@ -35,7 +35,12 @@ class vtkViewport;
 
 // FreeType
 
-#include <FTGL.h>
+#if (defined(__android__) || defined(ANDROID))
+//#	include <ftgles.h>
+#	include <FTGL.h>
+#else
+#	include <FTGL.h>
+#endif
 
 #include "vtk_freetype.h"  //since ft2build.h could be in the path
 #include FT_FREETYPE_H

@@ -1,4 +1,4 @@
-IF(NOT ANDROID)
+#IF(NOT ANDROID)
 vtk_module(vtkRenderingFreeType
   IMPLEMENTS
     vtkRenderingCore
@@ -17,23 +17,23 @@ vtk_module(vtkRenderingFreeType
   KIT
     vtkRendering
   )
-ELSE()
-vtk_module(vtkRenderingFreeType
-  IMPLEMENTS
-    vtkRenderingCore
-  GROUPS
-    Rendering
-  DEPENDS
-    vtkRenderingCore
-    vtkfreetype
-    vtkftgles
-  TEST_DEPENDS
-    vtkRenderingMatplotlib
-    vtkTestingRendering
-    vtkViewsContext2D
-    vtkRendering${VTK_RENDERING_BACKEND}
-    vtkRenderingContext${VTK_RENDERING_BACKEND}
-  KIT
-    vtkRendering
-  )
-ENDIF(NOT ANDROID)
+#ELSE()
+#vtk_module(vtkRenderingFreeType
+#  IMPLEMENTS
+#    vtkRenderingCore
+#  GROUPS
+#    Rendering
+#  DEPENDS
+#   vtkRenderingCore
+#    vtkfreetype
+#    vtkftgles
+#  TEST_DEPENDS
+#    vtkRenderingMatplotlib
+#    vtkTestingRendering
+#    vtkViewsContext2D
+#    vtkRendering${VTK_RENDERING_BACKEND}
+#   vtkRenderingContext${VTK_RENDERING_BACKEND}
+#  KIT
+#    vtkRendering
+#  )
+#ENDIF(NOT ANDROID)

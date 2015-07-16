@@ -46,6 +46,9 @@
 /* Define to 1 if you have the `wcsdup' function. */
 /* #undef HAVE_WCSDUP */
 
+/* define 1 if you have OpenGL ES 2.0 */
+#define FTGLES2
+
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
 #define LT_OBJDIR ".libs/"

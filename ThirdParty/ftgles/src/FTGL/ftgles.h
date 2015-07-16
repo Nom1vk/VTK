@@ -35,10 +35,10 @@ typedef float    FTGL_FLOAT;
 
 /* We need the Freetype headers */
 #define FTGL_EXPORT
-#include "ft2build.h"
-#include "freetype/freetype.h" //FT_FREETYPE_H
-#include "freetype/ftglyph.h" //FT_GLYPH_H
-#include "freetype/ftoutln.h" //FT_OUTLINE_H
+#include "vtk_freetype.h"
+#include "vtkfreetype/include/freetype/freetype.h" //FT_FREETYPE_H
+#include "vtkfreetype/include/freetype/ftglyph.h" //FT_GLYPH_H
+#include "vtkfreetype/include/freetype/ftoutln.h" //FT_OUTLINE_H
 
 /* Macros used to declare C-linkage types and symbols */
 #ifdef __cplusplus

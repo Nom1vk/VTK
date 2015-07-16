@@ -33,11 +33,11 @@
 #endif
 
 #ifdef FTGLES2
-#include <OpenGLES/ES2/gl.h>
-#include <OpenGLES/ES2/glext.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #else
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+#include <GLES/gl.h>
+#include <GLES/glext.h>
 #endif
 
 #ifdef __cplusplus
