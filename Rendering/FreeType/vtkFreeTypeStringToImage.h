@@ -18,8 +18,8 @@
 // .SECTION Description
 //
 
-#ifndef vtkFreeTypeStringToImage_h
-#define vtkFreeTypeStringToImage_h
+#ifndef __vtkFreeTypeStringToImage_h
+#define __vtkFreeTypeStringToImage_h
 
 #include "vtkRenderingFreeTypeModule.h" // For export macro
 #include "vtkStringToImage.h"
@@ -52,18 +52,13 @@ public:
 
   // Description:
   // Given a text property and a string, this function initializes the
-  // vtkImageData *data and renders it in a vtkImageData. textDims, if provided,
-  // will be overwritten by the pixel width and height of the rendered string.
-  // This is useful when ScaleToPowerOfTwo is true, and the image dimensions may
-  // not match the dimensions of the rendered text.
+  // vtkImageData *data and renders it in a vtkImageData.
   virtual int RenderString(vtkTextProperty *property,
                            const vtkUnicodeString& string,
-                           vtkImageData *data,
-                           int textDims[2] = NULL);
+                           vtkImageData *data);
   virtual int RenderString(vtkTextProperty *property,
                            const vtkStdString& string,
-                           vtkImageData *data,
-                           int textDims[2] = NULL);
+                           vtkImageData *data);
 
   // Description:
   // Should we produce images at powers of 2, makes rendering on old OpenGL
@@ -86,4 +81,4 @@ private:
   void operator=(const vtkFreeTypeStringToImage &);   // Not implemented.
 };
 
-#endif //vtkFreeTypeStringToImage_h
+#endif //__vtkFreeTypeStringToImage_h

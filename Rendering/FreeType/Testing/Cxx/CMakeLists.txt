@@ -1,54 +1,38 @@
-# Check that matplotlib is available
-include(FindPythonModules)
-find_python_module(matplotlib MATPLOTLIB_FOUND)
-
-if(NOT MATPLOTLIB_FOUND)
-  message(STATUS "Matplotlib not found! MathText rendering will not be available until it is installed. Disabling tests.")
-endif()
-
 # add tests that do not require data or produce vector output
-set(TestFreeTypeTextMapperNoMath_ARGS DATA{../Data/Fonts/DejaVuSans.ttf})
-set(TestMathTextFreeTypeTextRendererNoMath_ARGS
-  DATA{../Data/Fonts/DejaVuSans.ttf}
-)
-vtk_add_test_cxx(${vtk-module}CxxTests tests
-  TestFTStringToPath.cxx
-  TestFreeTypeTextMapperNoMath.cxx
-  TestMathTextFreeTypeTextRendererNoMath.cxx
-  TestTextActor.cxx
-  TestTextActor3D.cxx
-  TestTextActorAlphaBlending.cxx
-  TestTextActorDepthPeeling.cxx
-  TestTextActor3DAlphaBlending.cxx
-  TestTextActor3DDepthPeeling.cxx
+set(MyTests
   )
 
-if(MATPLOTLIB_FOUND)
-  set(TestMathTextFreeTypeTextRenderer_ARGS DATA{../Data/Fonts/DejaVuSans.ttf})
-  set(TestFreeTypeTextMapper_ARGS DATA{../Data/Fonts/DejaVuSans.ttf})
-
-  vtk_add_test_cxx(${vtk-module}CxxTests matplotlib_tests
-    TestMathTextFreeTypeTextRenderer.cxx
-    TestFreeTypeTextMapper.cxx
+if(VTK_DATA_ROOT)
+  # add tests that require data
+  set(MyTests ${MyTests}
+    TestFTStringToPath.cxx
     )
-  list(APPEND tests
-    ${matplotlib_tests})
 endif()
 
-# This benchmark takes a while to run and can't fail, so disable it by default:
-option(VTK_BUILD_FREETYPE_BENCHMARK
-  "Build a BenchmarkFreeTypeRendering test that benchmarks freetype rendering performance."
-  OFF)
-mark_as_advanced(VTK_BUILD_FREETYPE_BENCHMARK)
+# Use the testing object factory, to reduce boilerplate code in tests.
+include("${vtkTestingRendering_SOURCE_DIR}/vtkTestingObjectFactory.cmake")
+vtk_module_test_executable(${vtk-module}CxxTests ${Tests})
 
-if(VTK_BUILD_FREETYPE_BENCHMARK)
-  vtk_add_test_cxx(${vtk-module}CxxTests bench_tests
-    NO_VALID
-    BenchmarkFreeTypeRendering.cxx
-    )
-  list(APPEND tests
-    ${bench_tests})
-endif()
+set(TestsToRun ${Tests})
+remove(TestsToRun CxxTests.cxx)
 
-vtk_test_cxx_executable(${vtk-module}CxxTests tests
-  RENDERING_FACTORY)
+# Add all the executables
+foreach(test ${TestsToRun})
+  get_filename_component(TName ${test} NAME_WE)
+  if(VTK_DATA_ROOT)
+    if(${${TName}Error})
+      set(_error_threshold ${${TName}Error})
+    else()
+      set(_error_threshold 10)
+    endif()
+    add_test(NAME ${vtk-module}Cxx-${TName}
+      COMMAND ${vtk-module}CxxTests ${TName}
+        -D ${VTK_DATA_ROOT}
+        -T ${VTK_TEST_OUTPUT_DIR}
+        -V Baseline/Rendering/${TName}.png
+        -E ${_error_threshold})
+  else()
+    add_test(NAME FreeType-${TName}
+      COMMAND ${vtk-module}CxxTests ${TName})
+  endif()
+endforeach()

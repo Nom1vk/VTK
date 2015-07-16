@@ -20,8 +20,8 @@
 // Internal use only.
 // EXPERIMENTAL for the moment. Also include the old cache.
 
-#ifndef vtkFreeTypeUtilities_h
-#define vtkFreeTypeUtilities_h
+#ifndef __vtkFreeTypeUtilities_h
+#define __vtkFreeTypeUtilities_h
 
 #define VTK_FTFC_CACHE_CAPACITY 150
 
@@ -30,17 +30,10 @@
 
 class vtkImageData;
 class vtkTextProperty;
-class vtkTextActor;
-class vtkViewport;
 
 // FreeType
 
-#if (defined(__android__) || defined(ANDROID))
-//#	include <ftgles.h>
-#	include <FTGL.h>
-#else
-#	include <FTGL.h>
-#endif
+#include <FTGL.h>
 
 #include "vtk_freetype.h"  //since ft2build.h could be in the path
 #include FT_FREETYPE_H
@@ -190,10 +183,10 @@ public:
 
   // Description:
   // Deprecated function signature.  int x, y are ignored.
-  VTK_LEGACY(int RenderString(vtkTextProperty *tprop,
-                              const char *str,
-                              int x, int y,
-                              vtkImageData *data));
+  int RenderString(vtkTextProperty *tprop,
+                   const char *str,
+                   int x, int y,
+                   vtkImageData *data);
 
   // Description:
   // For internal use only.
@@ -243,8 +236,8 @@ public:
                         int *x, int *y);
 
   // Description:
-  // This function returns the font size (in points) required to fit the string
-  // in the target rectangle
+  // This function returns the font size required to fit the string in the
+  // target rectangle
   int GetConstrainedFontSize(const char *str, vtkTextProperty *tprop,
                              double orientation, int targetWidth,
                              int targetHeight);

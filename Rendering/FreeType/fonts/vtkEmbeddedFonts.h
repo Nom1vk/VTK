@@ -13,8 +13,8 @@
 
 =========================================================================*/
 
-#ifndef vtkEmbeddedFonts_h
-#define vtkEmbeddedFonts_h
+#ifndef __vtkEmbeddedFonts_h
+#define __vtkEmbeddedFonts_h
 
 #include <stddef.h>
 
