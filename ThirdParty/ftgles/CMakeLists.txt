@@ -30,19 +30,15 @@ SET (VTKFTGLES_DO_NOT_USE_STL 1)
 
 SET (FTGLES_SRCS
   src/FTBitmapGlyph.cpp
-  src/FTBitmapGlyphImpl.cpp
   src/FTCharmap.cpp
   src/FTFace.cpp
   src/FTFont.cpp
   src/FTBitmapFont.cpp
-  src/FTBitmapFontImpl.cpp
   src/FTPixmapFont.cpp
-  src/FTPixmapFontImpl.cpp
   src/FTGlyph.cpp
   src/FTGlyphContainer.cpp
   src/FTLibrary.cpp
   src/FTPixmapGlyph.cpp
-  src/FTPixmapGlyphImpl.cpp
   src/FTSize.cpp
 )
 
