@@ -55,10 +55,12 @@ public:
   // vtkImageData *data and renders it in a vtkImageData.
   virtual int RenderString(vtkTextProperty *property,
                            const vtkUnicodeString& string,
-                           vtkImageData *data);
+                           vtkImageData *data,
+                           int textDims[2] = NULL);
   virtual int RenderString(vtkTextProperty *property,
                            const vtkStdString& string,
-                           vtkImageData *data);
+                           vtkImageData *data,
+                           int text_dims[2] = NULL);
 
   // Description:
   // Should we produce images at powers of 2, makes rendering on old OpenGL
