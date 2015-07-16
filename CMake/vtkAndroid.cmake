@@ -101,7 +101,7 @@ set(android_cmake_flags
   -DModule_vtkParallelCore:BOOL=ON
   -DModule_vtkRenderingCore:BOOL=ON
   -DModule_vtkRenderingLOD:BOOL=ON
-  -DModule_vtkRenderingAnnotation:BOOL=OFF
+  -DModule_vtkRenderingAnnotation:BOOL=ON
   -DModule_vtkRenderingFreeType:BOOL=ON
 )
 
