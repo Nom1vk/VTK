@@ -23,7 +23,7 @@ SET (VTKFTGL_DO_NOT_USE_STL 1)
 
 #
 # Source files
-#
+# 
 SET (FTGL_SRCS
   src/FTBitmapGlyph.cpp
   src/FTBitmapGlyphRenderOpenGL.cpp
@@ -44,7 +44,7 @@ SET (FTGL_SRCS
 
 #
 # Do not use texture fonts (crash on Type1 fonts)
-#
+# 
 SET (VTKFTGL_DO_NOT_USE_TEXTURE_FONT 1)
 IF (NOT VTKFTGL_DO_NOT_USE_TEXTURE_FONT)
   SET (FTGL_SRCS ${FTGL_SRCS}
@@ -56,7 +56,7 @@ ENDIF ()
 #
 # Do not use vector fonts (we only need pixmap and bitmaps and vector fonts
 # needs glu). Might be an option at some point, but set it to 'true' for now.
-#
+# 
 SET (VTKFTGL_DO_NOT_USE_VECTORISER 1)
 IF (NOT VTKFTGL_DO_NOT_USE_VECTORISER)
   SET (FTGL_SRCS ${FTGL_SRCS}
@@ -99,7 +99,7 @@ ENDIF ()
 # We need OpenGL
 #
 # Use GL library provided by parent VTK if possible.
-#
+# 
 IF(NOT OPENGL_FOUND)
   FIND_PACKAGE(OpenGL)
 ENDIF()
