@@ -55,7 +55,6 @@ set(Module_SRCS
   vtkShader.cxx
   vtkShaderProgram.cxx
   vtkSobelGradientMagnitudePass.cxx
-  vtkTextureObject.cxx
   vtkTextureUnitManager.cxx
   vtkTranslucentPass.cxx
   vtkVolumetricPass.cxx
@@ -66,6 +65,7 @@ set(Module_SRCS
 
 if (NOT DEFINED OPENGL_ES_VERSION)
   set(Module_SRCS ${Module_SRCS}
+	vtkTextureObject.cxx
     vtkFrameBufferObject.cxx
     vtkPixelBufferObject.cxx
     )
