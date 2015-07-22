@@ -39,6 +39,7 @@
 using namespace ftgl;
 #endif
 
+
 // Print debug info
 
 #define VTK_FTFC_DEBUG 0

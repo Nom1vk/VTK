@@ -21,6 +21,15 @@
 
 #include "vtkOpenGLError.h"
 
+
+#if (defined ANDROID) && (VTK_OPENGL_ES_VERSION == 30)
+# define GL_WRITE_ONLY GL_WRITE_ONLY_OES
+# define glMapBuffer glMapBufferOES
+# define GL_PIXEL_PACK_BUFFER_ARB GL_PIXEL_PACK_BUFFER
+# define GL_PIXEL_UNPACK_BUFFER_ARB GL_PIXEL_UNPACK_BUFFER
+# define GL_READ_ONLY GL_MAP_READ_BIT
+#endif
+
 //#define VTK_PBO_DEBUG
 //#define VTK_PBO_TIMING
 

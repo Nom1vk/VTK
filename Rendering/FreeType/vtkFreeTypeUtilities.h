@@ -33,7 +33,7 @@ class vtkTextProperty;
 
 // FreeType
 
-//#include <FTGL.h>
+#include <FTGL.h>
 
 #include "vtk_freetype.h"  //since ft2build.h could be in the path
 #include FT_FREETYPE_H
@@ -93,7 +93,7 @@ public:
 
   // Description:
   // Get the FreeType library singleton.
-//  FT_Library* GetLibrary();
+  FT_Library* GetLibrary();
 
   // Description:
   // Set/Get the maximum number of faces (FT_Face), sizes (FT_Size) and
@@ -114,7 +114,7 @@ public:
   // Return true on success, false otherwise.
   // This method is successful
   // only when FreeType version is >= 2.1.9
-//  int GetSize(vtkTextProperty *tprop, FT_Size *size);
+  int GetSize(vtkTextProperty *tprop, FT_Size *size);
 
   // Description:
   // Given a text property, get the corresponding FreeType face.
@@ -123,7 +123,7 @@ public:
   // Return true on success, false otherwise
   // This method is successful
   // only when FreeType version is >= 2.1.9
-//  int GetFace(vtkTextProperty *tprop, FT_Face *face);
+  int GetFace(vtkTextProperty *tprop, FT_Face *face);
 
   // Description:
   // Given a text property and a character, get the corresponding FreeType
@@ -131,7 +131,7 @@ public:
   // Return true on success, false otherwise
   // This method is successful
   // only when FreeType version is >= 2.1.9
-//  int GetGlyphIndex(vtkTextProperty *tprop, FT_UInt32 c, FT_UInt *gindex);
+  int GetGlyphIndex(vtkTextProperty *tprop, FT_UInt32 c, FT_UInt *gindex);
 
   //BTX
   // Description:
@@ -154,10 +154,10 @@ public:
     GLYPH_REQUEST_OUTLINE = 2
   };
   //ETX
-//  int GetGlyph(vtkTextProperty *tprop,
-//               FT_UInt32 c,
- //              FT_Glyph *glyph,
-  //             int request = GLYPH_REQUEST_DEFAULT);
+  int GetGlyph(vtkTextProperty *tprop,
+               FT_UInt32 c,
+               FT_Glyph *glyph,
+               int request = GLYPH_REQUEST_DEFAULT);
 
   // Description:
   // Given a text property and a string, get the bounding box [xmin, xmax] x
@@ -206,14 +206,14 @@ public:
   // These methods are successful
   // only when FreeType version is >= 2.1.9
   int GetSize(unsigned long tprop_cache_id, int font_size, FT_Size *size);
- // int GetFace(unsigned long tprop_cache_id, FT_Face *face);
- // int GetGlyphIndex(unsigned long tprop_cache_id, FT_UInt32 c,
- //                   FT_UInt *gindex);
-//  int GetGlyph(unsigned long tprop_cache_id,
- //              int font_size,
- //              FT_UInt gindex,
-  //             FT_Glyph *glyph,
-   //            int request = GLYPH_REQUEST_DEFAULT);
+  int GetFace(unsigned long tprop_cache_id, FT_Face *face);
+  int GetGlyphIndex(unsigned long tprop_cache_id, FT_UInt32 c,
+                    FT_UInt *gindex);
+  int GetGlyph(unsigned long tprop_cache_id,
+               int font_size,
+               FT_UInt gindex,
+               FT_Glyph *glyph,
+               int request = GLYPH_REQUEST_DEFAULT);
 
   // Description:
   // Given a string and a TextProperty this function will calculate the height
@@ -249,7 +249,7 @@ public:
 
   // Old Code
   // Cache entry
-/*
+//*
   struct Entry
   {
     vtkTextProperty *TextProperty;
@@ -261,9 +261,9 @@ public:
     float LargestAscender;
     float LargestDescender;
   };
-*/
-//  vtkFreeTypeUtilities::Entry* GetFont(vtkTextProperty *tprop,
- //                                      double override_color[3] = NULL);
+//*/
+  vtkFreeTypeUtilities::Entry* GetFont(vtkTextProperty *tprop,
+                                       double override_color[3] = NULL);
 
 protected:
   //Internal helper method called by RenderString
@@ -284,15 +284,15 @@ private:
   // The cache manager, image cache and charmap cache
 
 #ifdef VTK_FREETYPE_CACHING_SUPPORTED
- // FTC_Manager *CacheManager;
- // FTC_ImageCache *ImageCache;
- // FTC_CMapCache  *CMapCache;
+  FTC_Manager *CacheManager;
+  FTC_ImageCache *ImageCache;
+  FTC_CMapCache  *CMapCache;
 
   // Description:
   // Get the FreeType cache manager, image cache and charmap cache
- // FTC_Manager* GetCacheManager();
- // FTC_ImageCache* GetImageCache();
- // FTC_CMapCache* GetCMapCache();
+  FTC_Manager* GetCacheManager();
+  FTC_ImageCache* GetImageCache();
+  FTC_CMapCache* GetCMapCache();
 #endif
 
   unsigned int MaximumNumberOfFaces;
@@ -310,8 +310,8 @@ private:
   void InitializeCache();
   void ReleaseCache();
 
-//  Entry *Entries[VTK_FTFC_CACHE_CAPACITY];
-//  int NumberOfEntries;
+  Entry *Entries[VTK_FTFC_CACHE_CAPACITY];
+  int NumberOfEntries;
 };
 
 #endif

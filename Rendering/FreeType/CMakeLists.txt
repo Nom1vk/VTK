@@ -20,6 +20,14 @@ set(Module_SRCS
   fonts/face_times.cxx
   fonts/face_times_italic.cxx
   )
+if (NOT DEFINED OPENGL_ES_VERSION)
+  set(Module_SRCS ${Module_SRCS}
+	vtkMathTextUtilities.cxx
+	vtkTextRendererStringToImage.cxx
+	vtkFreeTypeUtilities.cxx
+	vtkScaledTextActor.cxx
+    )
+endif()
 
 set_source_files_properties(
   vtkFreeTypeTools

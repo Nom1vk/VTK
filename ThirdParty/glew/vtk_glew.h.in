@@ -38,6 +38,7 @@
 # else
 #  include <GLES3/gl3.h>
 # endif
+# include <GLES2/gl2ext.h>
 #else
 # if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #  if VTK_OPENGL_ES_VERSION == 20

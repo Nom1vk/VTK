@@ -65,14 +65,16 @@ set(Module_SRCS
 
 if (NOT DEFINED OPENGL_ES_VERSION)
   set(Module_SRCS ${Module_SRCS}
-	vtkTextureObject.cxx
+	#vtkPixelBufferObject.cxx
     vtkFrameBufferObject.cxx
-    vtkPixelBufferObject.cxx
+    #vtkTextureObject.cxx
     )
 else()
   if (${OPENGL_ES_VERSION} MATCHES 3.0)
     set(Module_SRCS ${Module_SRCS}
       vtkFrameBufferObject.cxx
+      vtkPixelBufferObject.cxx
+	  vtkTextureObject.cxx
       )
   endif()
 endif()
