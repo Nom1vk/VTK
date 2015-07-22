@@ -718,8 +718,11 @@ bool vtkPixelBufferObject::Download3D(
 
   this->Bind(vtkPixelBufferObject::PACKED_BUFFER);
 
-
+#ifdef ANDROID
+void * ioMem = glMapBufferRange(this->BufferTarget, 0, Size, GL_MAP_READ_BIT);
+#else
   void* ioMem = glMapBuffer(this->BufferTarget, GL_READ_ONLY);
+#endif
   vtkOpenGLCheckErrorMacro("failed at glMapBuffer");
 
   switch (type)
